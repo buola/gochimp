@@ -146,6 +146,7 @@ type Message struct {
 	Metadata                map[string]string   `json:"metadata,omitempty"`
 	RecipientMetadata       []RecipientMetaData `json:"recipient_metadata,omitempty"`
 	Attachments             []Attachment        `json:"attachments,omitempty"`
+	Images             		[]Attachment        `json:"images,omitempty"`
 }
 
 func (m *Message) String() string {
@@ -195,8 +196,12 @@ func (m *Message) AddRecipientMetadata(metadata ...RecipientMetaData) {
 	m.RecipientMetadata = append(m.RecipientMetadata, metadata...)
 }
 
-func (m *Message) AddAttachments(attachement ...Attachment) {
-	m.Attachments = append(m.Attachments, attachement...)
+func (m *Message) AddAttachments(attachment ...Attachment) {
+	m.Attachments = append(m.Attachments, attachment...)
+}
+
+func (m *Message) AddImages(image ...Attachment) {
+	m.Images = append(m.Images, image...)
 }
 
 type Attachment struct {
