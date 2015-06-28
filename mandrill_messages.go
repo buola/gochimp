@@ -117,12 +117,12 @@ type SearchRequest struct {
 }
 
 func (a *MandrillAPI) MessageInfo(id string) (*SearchResponse, error) {
-	var response *SearchResponse
+	var response SearchResponse
 	var params map[string]interface{} = make(map[string]interface{})
 	//todo remove this hack
 	params["id"] = id
-	err := parseMandrillJson(a, messages_info_endpoint, params, response)
-	return response, err
+	err := parseMandrillJson(a, messages_info_endpoint, params, &response)
+	return &response, err
 }
 
 type Message struct {
