@@ -19,6 +19,7 @@ import (
 
 // see https://mandrillapp.com/api/docs/messages.html
 const messages_send_endpoint string = "/messages/send.json"                   // Send a new transactional message through Mandrill
+const messages_info_endpoint string = "/messages/info.json"                   // Get info about a message
 const messages_send_template_endpoint string = "/messages/send-template.json" // Send a new transactional message through Mandrill using a template
 const messages_search_endpoint string = "/messages/search.json"               // Search the content of recently sent messages and optionally narrow by date range, tags and senders
 const messages_parse_endpoint string = "/messages/parse.json"                 // Parse the full MIME document for an email message, returning the content of the message broken into its constituent pieces
@@ -113,6 +114,15 @@ type SearchRequest struct {
 	Tags     []string `json:"tags"`
 	Senders  []string `json:"senders"`
 	Limit    int      `json:"limit"`
+}
+
+func (a *MandrillAPI) MessageInfo(id string) (*SearchResponse, error) {
+	var response *SearchResponse
+	var params map[string]interface{} = make(map[string]interface{})
+	//todo remove this hack
+	params["id"] = id
+	err := parseMandrillJson(a, messages_info_endpoint, params, response)
+	return response, err
 }
 
 type Message struct {
