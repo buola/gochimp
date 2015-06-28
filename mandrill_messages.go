@@ -112,6 +112,7 @@ type SearchResponse struct {
 	Opens     int                 `json:"opens"`
 	Clicks    int                 `json:"clicks"`
 	State     string              `json:"state"`
+	Diag 	  string 			  `json:"diag"`
 	Metadata  []map[string]string `json:"metadata"`
 	SMTPEvents []SMTPEvent 		  `json:"smtp_events"`
 }
